@@ -3,49 +3,49 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
-    <link rel="stylesheet" href="css/jquery.mobile.icons-1.4.5.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/commen.css">
     <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body>
 
-
-
-<div data-role="page" id="pageone" data-position="fixed">
+<div>
     <!--header-->
-    <div data-role="header" id="index_header" class="search_header my_header ">
+    <div id="my_header" class="my_header">
         <img src="img/c.jpg">
         <p>华晨宇</p>
     </div>
 
     <!--main-->
-    <div data-role="main">
-        <ul data-role="listview" class="my_main">
-            <li data-transition="slide"><a href="collection.html">我的收藏</a></li>
-            <li><a href="#">收货地址</a></li>
-            <li><a href="#">设置</a></li>
-        </ul>
+    <div class="my_main">
+       <ul>
+           <li><a href="collection.html">我的收藏</a></li>
+           <li><a href="address.html">我的地址</a></li>
+           <li><a href="">设置</a></li>
+       </ul>
+
+        <!--退出当前账号-->
+        <div class="my_block">
+            <p>退出当前账号</p>
+        </div>
 
 
 
     </div>
 
     <!--footer-->
-    <div data-role="footer" id="index_footer" >
-        <div data-role="navbar" >
+    <div id="index_footer" >
+        <div>
             <ul>
-                <li><a href="index.html" data-icon="ui-btn ui-icon-home">首页</a></li>
-                <li><a href="#" data-icon="minus">更少</a></li>
-                <li><a href="my.html" data-icon="ui-btn ui-icon-user">我的</a></li>
-                <!--<li><a href="#" data-icon="check">喜爱</a></li>-->
-                <!--<li><a href="#" data-icon="info">信息</a></li>-->
+                <li ><a href="index.html">首页</a></li>
+                <li><a href="life.html">生活</a></li>
+                <li><a href="order.html">订单</a></li>
+                <li class="index_footer_active"><a href="my.html">我的</a></li>
             </ul>
         </div>
 
     </div>
+
 
 </div>
 
