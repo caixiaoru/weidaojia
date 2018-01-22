@@ -3,26 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/first.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,,minimum-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../css/first.css">
+    <style>
+        .aaa{display:none;position: fixed;top:55%;left:20%;border: 1px solid black;padding:10px;}
+    </style>
 </head>
 <body>
     <div class="whole">
 
          <form>
-             <!--<div class="whole_one">-->
-                 <!--<div class="whole_one_img"><img src="img/user.png"></div>-->
-                 <!--<div class="whole_one_content">-->
-                     <!--<label for="username"></label>-->
-                     <!--<input type="text" id="username">-->
-                 <!--</div>-->
-             <!--</div>-->
-             <input type="text">
+               <label for="user_name">用户名</label>
+               <input type="text" id="user_name">
+               <br/>
+               <label for="user_pas">密码</label>
+               <input type="password" id="user_pas">
+               <br/>
+               <label for="user_repas">确认密码</label>
+               <input type="password" id="user_repas">
 
-
+               <input type="button" value="提交" class="sub">
+               
          </form>
+        
+    </div>
+    <div class="aaa">
+        注册成功
     </div>
 </body>
-<script src="js/jquery.min.js"></script>
-<script src="js/commen.js"></script>
+<script src="../script/jquery.min.js"></script>
+<script src="../script/commen.js"></script>
+<script type="text/javascript">
+        $(function () {
+            
+            $(".sub").click(function () { //“tijiao”按钮单击事件
+                //获取用户名称
+                var strTxtName = $("#user_name").val();
+                console.log(strTxtName);
+                // //获取输入密码
+                var strTxtPass = $("#user_pas").val();
+                console.log(strTxtPass);
+                // // 确认密码
+                var strTxtrePass=$("#user_repas").val();
+                console.log(strTxtrePass);
+                //开始发送数据
+                $.ajax
+                ({ 
+                    type: 'get',
+                    url: "http://192.168.1.193:8090/food/sign/signup.do", 
+                    dataType: "json",
+                    
+                    data: { username: strTxtName, userPassword: strTxtPass,confirmPassword:strTxtrePass },
+                    success: function (result) { //注册成功后返回的数据
+                        //根据返回值进行状态显示
+                         console.log(result);
+                        console.log(typeof result.signInfo.result);
+                            
+                            if(result.signInfo.result == true){
+                                console.log("注册成功");
+                                $(".aaa").css("display","block");
+                                $(".aaa").click(function(){
+                                    $(window).attr('location','./signin.html');
+                                })
+                            }
+                            else{
+                                $(".aaa").css("display","block");
+                                $(".aaa").html(result.signInfo.msg);
+                                
+                            }
+                       
+                    }
+                })
+
+
+                
+            })
+        })
+    </script>
 </html>

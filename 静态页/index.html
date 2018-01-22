@@ -1,56 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="res/dist/jquery.vidbacking.css" type="text/css">
-<link rel="stylesheet" href="res/dist/style.css" type="text/css">
-<link href="res/dist/css.css" rel="stylesheet">
-<link href="css/commen.css" rel="stylesheet">
-<title>首页的首页</title>
-
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,,minimum-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="css/first.css">
+    <style>
+    form{font-size:24px}
+     input{height:24px;}
+        .aaa{display:none;position: fixed;top:65%;left:20%;border: 1px solid black;padding:10px;}
+    </style>
 </head>
 <body>
-    <video poster="res/assets/a.png" autoplay muted loop class="vidbacking">
+    <div class="whole">
 
-        <source src="res/assets/a.mp4" type="video/mp4">
-    </video>
-    <div class="video-content">
-        <!--点击跳过-->
-        <a href="html/index2.html" class="index_jump">点击跳过<span>5</span></a>
+         <form>
+               <label for="user_name">用户名</label>
+               <input type="text" id="user_name">
+               <br/>
+               <label for="user_pas">密码</label>
+               <input type="password" id="user_pas">
+               <br/>
+               <label for="user_repas">确认密码</label>
+               <input type="password" id="user_repas">
 
-        <div class="index_title"><p id="strin"></p></div>
-        <div class="clearfix"></div>
+               <input type="button" value="提交" class="sub">
+               
+         </form>
+        
     </div>
-
-
-
-    <script src="script/jquery.min.js"></script>
-    <script src="res/dist/jquery.vidbacking.js" type="text/javascript"></script>
-    <script type="text/javascript">
-//        首页视频
-        $(function(){
-            $('body').vidbacking({
-                'masked': true
-            });
-        });
-
-//        首页的首页标题动画
-        var str="味到家";
-        var len=str.length;
-        var i=1;
-        function showword(){
-            document.getElementById("strin").innerHTML=str.substr(0,i);
-            i++;
-            if(i>len){
-                clearInterval("done");
-            }
-        }
-        var done=setInterval("showword()",180);
-
-//        首页的首页倒计时
-
-    </script>
+    <div class="aaa">
+        注册成功
+    </div>
 </body>
+<script src="script/jquery.min.js"></script>
+<script src="script/commen.js"></script>
+<script type="text/javascript">
+        $(function () {
+            
+            $(".sub").click(function () { //“tijiao”按钮单击事件
+                //获取用户名称
+                var strTxtName = $("#user_name").val();
+                console.log(strTxtName);
+                // //获取输入密码
+                var strTxtPass = $("#user_pas").val();
+                console.log(strTxtPass);
+                // // 确认密码
+                var strTxtrePass=$("#user_repas").val();
+                console.log(strTxtrePass);
+                //开始发送数据
+                $.ajax
+                ({ 
+                    type: 'get',
+                    url: "http://192.168.1.193:8090/food/sign/signup.do", 
+                    dataType: "json",
+                    
+                    data: { username: strTxtName, userPassword: strTxtPass,confirmPassword:strTxtrePass },
+                    success: function (result) { //注册成功后返回的数据
+                        //根据返回值进行状态显示
+                         console.log(result);
+                        console.log(typeof result.signInfo.result);
+                            
+                            if(result.signInfo.result == true){
+                                console.log("注册成功");
+                                $(".aaa").css("display","block");
+                                $(".aaa").html("注册成功");
+                                $(".aaa").click(function(){
+                                    $(window).attr('location','html/signin.html');
+                                })
+                            }
+                            else{
+                                $(".aaa").css("display","block");
+                                $(".aaa").html(result.signInfo.msg);
+                                
+                            }
+                       
+                    }
+                })
+
+
+                
+            })
+        })
+    </script>
 </html>

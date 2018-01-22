@@ -47,19 +47,7 @@ $(function(){
          };            
          
          var p_height=$(".life_main_list_content_two_a p").height();       
-        // for(var i=0;i<list_life_len;i++){
-        //     var click=list_life[i];                 
-         //    if($(click).find(".life_main_list_content_two>p:nth-of-type(2)").html() == "展开"){            
-        //        $(click).find(".life_main_list_content_two>p:nth-of-type(2)").click(function(){                
-        //          $(click).find(".life_main_list_content_two_a").css("height",100);                
-        //         $(this).html("收起");               
-        //        })
-        //    }
-                
-        // }
-
-        $(".life_main_open").click(function(){
-            
+         $(".life_main_open").click(function(){            
             if($(this).html() == "展开"){
                 $(this).html("收起");
                 $(this).prev().css("height",p_height);
@@ -68,11 +56,8 @@ $(function(){
                 $(this).html("展开");
                 $(this).prev().css("height",58);
             }
-        })
-
+        })      
         
-        
-
 //商家店铺store.html
     $(".store_main_food_left ul li").click(function(){
         console.log("左侧");
@@ -80,12 +65,8 @@ $(function(){
         $(".store_main_food_right ul li").eq($(this).index()).addClass("store_main_food_right_show").siblings().removeClass("store_main_food_right_show");
     });
 
-
-
 //    点击收藏
     $(".store_collect").click(function(){
-
-
         if($(this).hasClass("fa-heart-o")){
             $(this).attr("class","fa fa-heart fa-2x store_collect");
         }
@@ -108,43 +89,45 @@ $(function(){
     // })
 
 
-    
+    // 左边减号的颜色
     if(parseInt($("input").val()) <1){
             $(".trans_cir_one").css("color","gray");
          } 
          else{
             $(".trans_cir_one").css("color","mediumseagreen");
          } 
-
+    
+    // 加号与加减号的切换
     $(".store_carone").click(function(){
         $(this).removeClass("store_car_show");
         $(this).next().addClass("store_car_show");
     })
-    $(".trans_cir_two").click(function(){
-
+    // 点击事件
+    $(".trans_cir_two_1").click(function(){
         var num = parseInt($("input").val()); 
-         $("input").val(num+1);      
-         // if($("input").val() == 0){
-         //    $(".trans_cir_one").css("color","gray");
-         // } 
-         // else{
-         //    $(".trans_cir_one").css("color","mediumseagreen");
-         // } 
-
+          $("input").val(num+1);
+    })
+     $(".trans_cir_two_2").click(function(){
+        var num = parseInt($("input").val()); 
+          $(this).prev().val(num+1);
     })
     $(".trans_cir_one").click(function(){
         var num = parseInt($("input").val()); 
-         $("input").val(num-1); 
-
-         // if($("input").val() == 0){
-         //    $(".trans_cir_one").css("color","gray");
-
-         // } 
-         // else{
-         //    $(".trans_cir_one").css("color","mediumseagreen");
-         // }
+         $(this).next().val(num-1); 
+        if(parseInt($("input").val()) <1){
+            $(".trans_cir_one").css("pointer-events","none");
+         } 
+         else{
+            $(".trans_cir_one").css("pointer-events","auto");
+         }
             
     })
 
+    // 修改收货地址--性别
+    $(".address_edit_sex span").click(function(){
+        console.log("09756789");
+        $(this).css("background","mediumseagreen");
+        $(this).siblings().css("background","white");
+    })
 
 });

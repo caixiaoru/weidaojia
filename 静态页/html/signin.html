@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,,minimum-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../css/first.css">
+     <style>
+     form{font-size:24px}
+     input{height:24px;}
+        .aaa{display:none;position: fixed;top:65%;left:20%;border: 1px solid black;padding:10px;}
+    </style>
+</head>
+<body>
+    <div class="whole">
+
+         <form>
+               <label for="user_name">用户名</label>
+               <input type="text" id="user_name">
+               <br/>
+               <label for="user_pas">密码</label>
+               <input type="password" id="user_pas">
+               <br/>
+               <input type="button" value="登录" class="signin">
+
+         </form>
+         <div class="aaa">
+        
+    </div>
+    </div>
+</body>
+<script src="../script/jquery.min.js"></script>
+<script src="../script/commen.js"></script>
+<script type="text/javascript">
+       $(function () {
+            
+            $(".signin").click(function () { //“tijiao”按钮单击事件
+                //获取用户名称
+                var strTxtName = $("#user_name").val();
+                console.log(strTxtName);
+                // //获取输入密码
+                var strTxtPass = $("#user_pas").val();
+                console.log(strTxtPass);
+                
+                //开始发送数据
+                $.ajax
+                ({ 
+                    type: 'get',
+                    url: "http://192.168.1.193:8090/food/sign/signin.do", 
+                    dataType: "json",                    
+                    data: { username: strTxtName, userPassword: strTxtPass},
+                    success: function (result) { //注册成功后返回的数据
+                        //根据返回值进行状态显示
+                        console.log(result);
+                        console.log(result.signInfo.result);
+                        if(result.signInfo.result == true){
+                                console.log("登录成功");
+                                
+                                    $(window).attr('location','./index2.html');
+                                
+                            }
+                            else{
+                                $(".aaa").css("display","block");
+                                $(".aaa").html(result.signInfo.msg);
+                            }
+                    }
+                })
+
+
+                
+            })
+        })
+    </script>
+</html>
