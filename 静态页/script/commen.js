@@ -129,5 +129,9 @@ $(function(){
         $(this).css("background","mediumseagreen");
         $(this).siblings().css("background","white");
     })
+    // zhifu
+    $(".footer_pay").click(function(){
+        $(".pay_succ").fadeIn();
+    })
 
 });
